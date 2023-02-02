@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: emsp-platform-kustomization
+resources:
+  # 0. Get the namespaces first
+  - application/emsp-platform-namespace.yaml
+  - monitoring/emsp-platform-monitoring-namespace.yaml
+
+  # 1. Set up monitoring services (prometheus)
+  #- monitoring/prometheus/prometheus-roles.yaml
+  - monitoring/prometheus/config-map.yaml
+  - monitoring/prometheus/prometheus-roles.yaml
+  - monitoring/prometheus/prometheus-deployment.yaml
+  - monitoring/prometheus/prometheus-service.yaml
+
+  # 2. Set up monitoring services (grafana)
+  - monitoring/grafana/grafana-deployment.yaml
+  - monitoring/grafana/grafana-service.yaml
+
+  # 3. Set up Ingress service
+  - application/emsp-platform-ingress-service.yaml
+
+  # 4. Set up the application services (backend)
+  - application/emsp-platform-namespace.yaml
+  - application/emsp-platform-service.yaml
+  - application/emsp-platform-deployment.yaml
+
+  # 5. Set up the application services (frontend) [[ TODO ]]

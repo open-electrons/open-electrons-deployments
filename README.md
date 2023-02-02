@@ -19,10 +19,10 @@ We are using helm for templating & packaging. We use the standard helm folder st
 │   ├        ├── todo.yaml
 │   ├        ├── todo.yaml
 │   ├        └── todo.yaml
-├   ├── dev
+├   ├── test
 │   ├    ├── flux-patch.yaml
 │   ├    └── kustomization.yaml
-│   ├── production
+│   ├── prod
 ├   ├    ├── flux-patch.yaml
 └   ├    ├── kustomization.yaml
 ```

@@ -1,0 +1,42 @@
+# Default values for emsp-platform-deployment
+
+replicaCount: 1
+app:
+  version: refs/tags/v0.0.11
+  name: emsp-platform
+  namespace: open-electrons-ns
+  ## Deployment Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  ##
+  securityContext:
+    enabled: true
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+    runAsNonRoot: true
+grafanaService:
+  component: monitoring
+  name: open-electrons-grafana
+  port: 8080
+prometheusService:
+  component: monitoring
+  name: open-electrons-prometheus
+  port: 8080
+  image:
+    repository: prom/prometheus
+    tag: v2.23.0
+eMSPPlatformService:
+  component: server
+  image: # Docker tag will be the app.version
+    repository: docker.io/open-electrons/
+    pullPolicy: IfNotPresent
+  ports:
+    containerPort: 8080
+  service:
+    name: emsp-platform-service
+    type: ClusterIP
+    port: 9000
+    portName: emsp-platform-port
+    targetPort: 9000
+  ingress:
+    host: ????
