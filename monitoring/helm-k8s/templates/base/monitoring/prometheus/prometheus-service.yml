@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: open-electrons-prometheus
+  namespace: open-electrons-monitoring
+  # namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/path:   /metrics
+      prometheus.io/port:   '8080'
+  
+spec:
+  selector: 
+    app: open-electrons-prometheus
+  type: ClusterIP  
+  ports:
+    - port: 8080
+      targetPort: 8080

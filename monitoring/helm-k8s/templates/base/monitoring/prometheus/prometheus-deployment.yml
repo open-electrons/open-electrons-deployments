@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ .Values.prometheusService.name }}
+    app.kubernetes.io/component: {{ .Values.prometheusService.component }}
+    app.kubernetes.io/part-of: {{ .Values.prometheusService.name }}
+    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/instance: {{ .Values.prometheusService.name }}
+    app.kubernetes.io/version: {{ .Values.app.version }} # TODO: Better use the Prometheus version
+  name: prometheus-{{ .Values.app.name }}
+  namespace: open-electrons-monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-electrons-prometheus
+  template:
+    metadata:
+      labels:
+        name: open-electrons-prometheus
+    spec:
+      securityContext:
+        runAsUser: {{  .Values.app.securityContext.runAsUser }}
+        runAsGroup: {{  .Values.app.securityContext.runAsGroup }}
+        fsGroup: {{  .Values.app.securityContext.fsGroup }}
+        runAsNonRoot: {{  .Values.app.securityContext.runAsNonRoot }}
+      containers:
+        - name: prometheus
+          image: {{ .Values.prometheusService.image.repository}}:{{ .Values.prometheusService.image.tag}}
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: prometheus-server-conf
+        - name: prometheus-storage-volume
+          emptyDir: {}

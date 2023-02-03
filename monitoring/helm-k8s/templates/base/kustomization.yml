@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: open-electrons-monitoring-kustomization
+resources:
+  # 0. Get the namespaces first
+  - monitoring/open-electrons-monitoring-namespace.yml
+
+  # 1. Set up monitoring services (prometheus)
+  #- monitoring/prometheus/prometheus-roles.yml
+  - monitoring/prometheus/prometheus-config.yml
+  - monitoring/prometheus/prometheus-roles.yml
+  - monitoring/prometheus/prometheus-deployment.yml
+  - monitoring/prometheus/prometheus-service.yml
+
+  # 2. Set up monitoring services (grafana)
+  - monitoring/grafana/grafana-datasource-config.yml
+  - monitoring/grafana/grafana-deployment.yml
+  - monitoring/grafana/grafana-service.yml

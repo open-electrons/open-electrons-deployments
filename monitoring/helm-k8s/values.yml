@@ -1,0 +1,27 @@
+# Default values for open-electrons-monitoring-deployment
+
+replicaCount: 1
+app:
+  version: refs/tags/v0.0.11
+  name: open-electrons-monitoring
+  namespace: open-electrons-monitoring-ns
+  ## Deployment Security Context
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  ##
+  securityContext:
+    enabled: true
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+    runAsNonRoot: true
+grafanaService:
+  component: monitoring
+  name: open-electrons-grafana
+  port: 8080
+prometheusService:
+  component: monitoring
+  name: open-electrons-prometheus
+  port: 8080
+  image:
+    repository: prom/prometheus
+    tag: v2.23.0

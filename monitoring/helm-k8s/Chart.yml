@@ -1,0 +1,12 @@
+apiVersion: v1
+name: open-electrons-monitoring
+version: 1.0.0
+description: Helm charts for open-electrons kubernetes monitoring project
+keywords:
+  - open-electrons-monitoring
+  - management
+home: https://github.com/open-electrons/open-electrons-deployments
+maintainers:
+  - name: Joesan
+    email: https://github.com/open-electrons
+    url: https://open-electrons.github.io/home/

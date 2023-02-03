@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-{{ .Values.app.name }}
+  namespace: open-electrons-monitoring
+  labels:
+    app.kubernetes.io/name: {{ .Values.grafanaService.name }}
+    app.kubernetes.io/component: {{ .Values.grafanaService.component }}
+    app.kubernetes.io/part-of: {{ .Values.grafanaService.name }}
+    app.kubernetes.io/managed-by: helm
+    app.kubernetes.io/instance: {{ .Values.grafanaService.name }}
+    app.kubernetes.io/version: {{ .Values.app.version }} # TODO: Better use the Grafana version
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-electrons-grafana
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: open-electrons-grafana
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        runAsNonRoot: true
+      containers:
+        - image: grafana/grafana:latest
+          imagePullPolicy: IfNotPresent
+          name: open-electrons-grafana
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+            requests:
+              memory: 500M
+              cpu: "500m"
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-storage
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: grafana-datasources
+              readOnly: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: grafana-storage
+          emptyDir: {}
+        - name: grafana-datasources
+          configMap:
+            defaultMode: 420
+            name: grafana-datasources
