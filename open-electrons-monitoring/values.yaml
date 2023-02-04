@@ -1,3 +1,7 @@
+# Default values for k3s-monitoring.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
 # Default values for open-electrons-monitoring-deployment
 
 replicaCount: 1

@@ -26,7 +26,7 @@ spec:
         fsGroup: {{  .Values.app.securityContext.fsGroup }}
         runAsNonRoot: {{  .Values.app.securityContext.runAsNonRoot }}
       containers:
-        - name: prometheus
+        - name: open-electrons-prometheus
           image: {{ .Values.prometheusService.image.repository}}:{{ .Values.prometheusService.image.tag}}
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
