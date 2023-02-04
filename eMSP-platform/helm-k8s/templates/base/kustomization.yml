@@ -5,23 +5,11 @@ metadata:
 resources:
   # 0. Get the namespaces first
   - application/emsp-platform-namespace.yaml
-  - monitoring/emsp-platform-monitoring-namespace.yaml
 
-  # 1. Set up monitoring services (prometheus)
-  #- monitoring/prometheus/prometheus-roles.yml
-  - monitoring/prometheus/prometheus-config.yml
-  - monitoring/prometheus/prometheus-roles.yml
-  - monitoring/prometheus/prometheus-deployment.yml
-  - monitoring/prometheus/prometheus-service.yml
-
-  # 2. Set up monitoring services (grafana)
-  - monitoring/grafana/grafana-deployment.yaml
-  - monitoring/grafana/grafana-service.yaml
-
-  # 3. Set up Ingress service
+  # 1. Set up Ingress service
   - application/emsp-platform-ingress-service.yaml
 
-  # 4. Set up the application services (backend)
+  # 2. Set up the application services (backend)
   - application/emsp-platform-namespace.yaml
   - application/emsp-platform-service.yaml
   - application/emsp-platform-deployment.yaml

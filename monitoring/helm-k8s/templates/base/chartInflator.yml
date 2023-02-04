@@ -1,0 +1,11 @@
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+# The name of the chart to use and its location
+chartName: open-electrons-monitoring
+chartHome: ../../../helm-k8s/
+# The name of the release
+releaseName: open-electrons-monitoring-chart
+# Path to a values.yaml
+values: ../../values.yaml
+# Namespace to deploy to
+releaseNamespace: open-electrons-monitoring-ns
