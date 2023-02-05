@@ -12,7 +12,7 @@ resources:
   #- monitoring/prometheus/prometheus-roles.yml
   - prometheus/prometheus-config.yml
   - prometheus/prometheus-roles.yml
-  #- prometheus/prometheus-deployment.yml
+ # - prometheus/prometheus-deployment.yml
   - prometheus/prometheus-service.yml
 
   # 2. Set up monitoring services (grafana)

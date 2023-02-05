@@ -4,7 +4,7 @@ kind: HelmChartInflationGenerator
 metadata:
   name: open-electrons-helm-inflator
 # The name of the chart to use and its location
-chartName: open-electrons-monitoring
+name: open-electrons-monitoring
 chartHome: /Projects/Private/scala-projects/open-electrons/open-electrons-deployments/k3s-monitoring
 # The name of the release
 releaseName: open-electrons-monitoring-chart
