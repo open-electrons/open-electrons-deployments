@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: open-electrons-prometheus
-  namespace: open-electrons-monitoring
+  name: {{ .Values.prometheusService.name }}
+  namespace: {{ .Values.app.namespace }}
   # namespace: monitoring
   annotations:
       prometheus.io/scrape: 'true'
@@ -11,7 +11,7 @@ metadata:
   
 spec:
   selector: 
-    app: open-electrons-prometheus
+    app: {{ .Values.prometheusService.name }}
   type: ClusterIP  
   ports:
     - port: 8080

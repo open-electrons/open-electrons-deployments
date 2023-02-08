@@ -4,7 +4,7 @@ metadata:
   name: prometheus-server-conf
   labels:
     name: prometheus-server-conf
-    namespace: open-electrons-monitoring
+    namespace: {{ .Values.app.namespace }}
 data:
   prometheus.yml: |-
     global:

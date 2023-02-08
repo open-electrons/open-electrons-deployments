@@ -9,16 +9,16 @@ metadata:
     app.kubernetes.io/instance: {{ .Values.prometheusService.name }}
     app.kubernetes.io/version: {{ .Values.app.version }} # TODO: Better use the Prometheus version
   name: prometheus-{{ .Values.app.name }}
-  namespace: open-electrons-monitoring
+  namespace: {{ .Values.app.namespace }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: open-electrons-prometheus
+      app: {{ .Values.prometheusService.name }}
   template:
     metadata:
       labels:
-        name: open-electrons-prometheus
+        name: {{ .Values.prometheusService.name }}
     spec:
       securityContext:
         runAsUser: {{  .Values.app.securityContext.runAsUser }}
@@ -26,7 +26,7 @@ spec:
         fsGroup: {{  .Values.app.securityContext.fsGroup }}
         runAsNonRoot: {{  .Values.app.securityContext.runAsNonRoot }}
       containers:
-        - name: open-electrons-prometheus
+        - name: {{ .Values.prometheusService.name }}
           image: {{ .Values.prometheusService.image.repository}}:{{ .Values.prometheusService.image.tag}}
           args:
             - "--config.file=/etc/prometheus/prometheus.yml"
