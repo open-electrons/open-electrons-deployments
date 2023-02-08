@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana-{{ .Values.app.name }}
-  namespace: open-electrons-monitoring
+  namespace: {{ .Values.app.namespace }}
   labels:
-    #app.kubernetes.io/name: {{ .Values.grafanaService.name }}
+    app.kubernetes.io/name: {{ .Values.grafanaService.name }}
     app.kubernetes.io/component: {{ .Values.grafanaService.component }}
-    #app.kubernetes.io/part-of: {{ .Values.grafanaService.name }}
+    app.kubernetes.io/part-of: {{ .Values.grafanaService.name }}
     app.kubernetes.io/managed-by: helm
-    #app.kubernetes.io/instance: {{ .Values.grafanaService.name }}
+    app.kubernetes.io/instance: {{ .Values.grafanaService.name }}
     app.kubernetes.io/version: {{ .Values.app.version }} # TODO: Better use the Grafana version
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: open-electrons-grafana
+      app: {{ .Values.grafanaService.name }}
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -24,7 +24,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        name: open-electrons-grafana
+        name: {{ .Values.grafanaService.name }}
     spec:
       securityContext:
         runAsUser: 1000
@@ -34,7 +34,7 @@ spec:
       containers:
         - image: grafana/grafana:latest
           imagePullPolicy: IfNotPresent
-          name: open-electrons-grafana
+          name: {{ .Values.grafanaService.name }}
           ports:
             - containerPort: 3000
               protocol: TCP

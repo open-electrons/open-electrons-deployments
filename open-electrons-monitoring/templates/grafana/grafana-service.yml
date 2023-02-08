@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: open-electrons-grafana
-  namespace: open-electrons-monitoring
+  name: {{ .Values.grafanaService.name }}
+  namespace: {{ .Values.app.namespace }}
   annotations:
     prometheus.io/scrape: 'true'
     prometheus.io/path:   /metrics
