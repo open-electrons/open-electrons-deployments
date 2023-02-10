@@ -5,6 +5,13 @@ TODO: Under construction
 Contains the Kubernetes deployment manifests for all open-electrons projects
 
 ## helm
+
+install helm unittests using:
+
+´´´
+helm plugin install https://github.com/quintush/helm-unittest
+´´´
+
 We are using helm for templating & packaging. We use the standard helm folder structure:
 
 ```
