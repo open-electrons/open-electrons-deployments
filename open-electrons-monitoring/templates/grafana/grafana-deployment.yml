@@ -32,7 +32,7 @@ spec:
         fsGroup: 2000
         runAsNonRoot: true
       containers:
-        - image: grafana/grafana:latest
+        - image: {{ .Values.grafanaService.image.repository}}:{{ .Values.grafanaService.image.tag}}
           imagePullPolicy: IfNotPresent
           name: {{ .Values.grafanaService.name }}
           ports:

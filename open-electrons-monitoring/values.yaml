@@ -22,6 +22,9 @@ grafanaService:
   component: monitoring
   name: open-electrons-grafana
   port: 8080
+  image:
+    repository: grafana/grafana
+    tag: latest
 prometheusService:
   component: monitoring
   name: open-electrons-prometheus

@@ -35,3 +35,12 @@ We are using helm for templating & packaging. We use the standard helm folder st
 ├   ├    ├── flux-patch.yaml
 └   ├    ├── kustomization.yaml
 ```
+
+## unit-test
+
+Like everything, we unit test and continuously integrate the unit tests with a GitHub Actions pipeline. To run
+the unit tests for the helm charts (we only do template testing as of now), navigate to any project folder and run
+
+´´´
+go test -v
+´´´

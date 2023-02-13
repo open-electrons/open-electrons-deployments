@@ -1,4 +1,4 @@
-package test
+package grafana
 
 import (
 	"testing"
@@ -10,7 +10,7 @@ import (
 
 func TestGrafanaHelmChartTemplate(t *testing.T) {
 	// Path to the helm chart we will test
-	helmChartGrafanaPath := "../templates/grafana"
+	helmChartGrafanaPath := "../open-electrons-monitoring"
 
 	// Setup the args. For this test, we will set the following input values:
 	// - image=grafana:latest
@@ -19,7 +19,7 @@ func TestGrafanaHelmChartTemplate(t *testing.T) {
 	}
 
 	// Run RenderTemplate to render the template and capture the output.
-	output := helm.RenderTemplate(t, options, helmChartGrafanaPath, "pod", []string{"templates/grafana/grafana-deployment.yml"})
+	output := helm.RenderTemplate(t, options, helmChartGrafanaPath, "pod", []string{"../../templates/grafana/grafana-deployment.yml"})
 
 	// Now we use kubernetes/client-go library to render the template output into the Pod struct. This will
 	// ensure the Pod resource is rendered correctly.
