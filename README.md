@@ -1,6 +1,6 @@
 # open-electrons-deployments
 
-TODO: Under construction
+TODO: Currently under construction
 
 Contains the Kubernetes deployment manifests for all open-electrons projects
 

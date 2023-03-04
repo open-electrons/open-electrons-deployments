@@ -1,6 +1,13 @@
 name: Lint and Test Charts
 
-on: pull_request
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "!**/README.md"
+      - "!images/**"
+      - "!README.md"
 
 jobs:
   lint-test:
