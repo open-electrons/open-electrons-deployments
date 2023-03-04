@@ -2,8 +2,9 @@ name: Lint and Test Charts
 
 on:
   push:
-    branches:
-      - master
+    branches: [ main/master ]
+  pull_request:
+    branches: [ main/master ]
     paths:
       - 'open-electrons-monitoring/**'
       - "!**/README.md"
