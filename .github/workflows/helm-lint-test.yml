@@ -5,6 +5,7 @@ on:
     branches:
       - master
     paths:
+      - 'open-electrons-monitoring/**'
       - "!**/README.md"
       - "!images/**"
       - "!README.md"
